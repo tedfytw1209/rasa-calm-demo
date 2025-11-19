@@ -140,7 +140,6 @@ dmypy.json
 models/
 .config/
 .keras/
-prompts/
 tests/
 qdrant_storage/
 

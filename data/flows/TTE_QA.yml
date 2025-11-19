@@ -1,0 +1,92 @@
+flows:
+  target_trail_emulation_qa:
+    name: target trail emulation question answering
+    description: Support flow to emulate target trail for QA purposes
+    steps:
+    - id: classify_intent
+    - call: classify_user_intent
+      next:
+        - if: slots.user_intent = "pipeline"
+          then: pipeline_assistant
+        - if: slots.user_intent = "evidence"
+          then: evidence_search
+        - if: slots.user_intent = "concept"
+          then: concept_explain
+        - if: slots.user_intent = "options"
+          then: options_recommendation
+        - else: cancel_qa
+    - call: check_finish_pipeline
+      next:
+        - if: not slots.finish
+          then: pipeline_assistant
+        - else: classify_intent
+
+  classify_user_intent:
+    name: classify user intent
+    description: You are the Workflow Classifier for the TTE Protocol Builder. User intent classification for QA purposes. rag ↔ intent is evidence; define ↔ intent is concept; compare, options ↔ intent is options. Return { user_intent evidence | concept | options }
+    steps:
+      - collect: user_intent
+        reset_after_flow_ends: True
+        ask_before_filling: False
+      - id: cancel_qa
+        action: utter_cancel_qa
+
+  evidence_search:
+    name: evidence search
+    description: Evidence Assistant agent. Retrieve and summarize examples from annotated TTE study data or literature (via RAG).
+    prompt_template: prompts/evidence_search.jinja2
+    steps:
+      - action: action_trigger_search
+      - id: cancel_qa
+        action: utter_cancel_qa
+
+  concept_explain:
+    name: concept explain
+    description: Concept Explainer agent for a Target Trial Emulation (TTE) protocol. Explain the meaning of a given concept or term used in TTE studies (via RAG).
+    prompt_template: prompts/concept_explain.jinja2
+    steps:
+      - action: action_trigger_search
+      - id: cancel_qa
+        action: utter_cancel_qa
+  
+  options_recommendation:
+    name: options recommendation
+    description: Options Recommender agent. Recommend suitable options for various components of a Target Trial Emulation (TTE) protocol (via RAG).
+    prompt_template: prompts/options_recommendation.jinja2
+    steps:
+      - action: action_options_search
+      - action: utter_options_list
+      - id: cancel_qa
+        action: utter_cancel_qa
+
+pipeline_assistant:
+    name: pipeline assistant
+    description: Pipeline Assistant agent for guiding users through the steps of building a Target Trial Emulation (TTE) protocol.
+    steps:
+      - action: utter_component_ask
+      - collect: current_component
+        ask_before_filling: True
+      - id: route_component
+        next:
+          - if: slots.current_component = "eligibility"
+            then: eligibility_details
+          - else: END
+      - id: eligibility_details
+      - collect: eligibility_population
+      - collect: eligibility_inclusioncriteria
+      - collect: eligibility_exclusioncriteria
+      - collect: eligibility_computablephenotype
+      - collect: eligibility_population_evaluation
+      - action: action_mark_component_done
+
+check_finish_pipeline:
+    name: check finish pipeline
+    description: Check if the user has finished building the TTE protocol.
+    steps:
+      - action: action_check_finish_pipeline
+
+export_pipeline_json:
+    name: export pipeline json
+    description: Export the constructed TTE protocol as JSON once all components are finished.
+    steps:
+      - action: action_export_protocol_json

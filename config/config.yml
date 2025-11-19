@@ -37,5 +37,18 @@ policies:
   constrain_similarities: true
 - name: FlowPolicy
 - name: EnterpriseSearchPolicy
+  use_generative_llm: true         # RAG (generative) mode, default but explicit
+  vector_store:
+    type: faiss                    # or "qdrant" / "milvus"
+    source: "./docs"               # directory with your concept docs (Faiss)
+  llm:
+    # use your model group or direct model
+    model_group: "openai-direct-gpt-4o"
+  embedding:
+    model_group: "openai-embeddings"
+  prompt_template: "prompts/concept-explainer-rag.jinja2"
+  citation_enabled: false          # your Concept Explainer doesn’t need citations
+  max_messages_in_query: 1         # only the last user question is enough
+  max_history: 1
 
 assistant_id: 20240418-073244-narrow-archive

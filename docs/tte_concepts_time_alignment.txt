@@ -1,0 +1,36 @@
+# Target Trial Emulation: Time-Alignment Concepts
+
+## 1. Time-alignment (nested design)
+Time-alignment using a nested design creates repeated “nested trials” over time, each with its own time zero. At each calendar period (e.g., monthly), eligible individuals are identified, and those who initiate treatment at that time form the treated group for that nested trial. Non-initiators during the same period can serve as comparators. This design ensures that treated and untreated individuals are aligned at comparable time points and share similar follow-up windows. It also reduces immortal-time bias by using eligibility snapshots that reset at each nesting event.
+
+Example (nested alignment):
+A study constructs monthly nested cohorts. Every month, all eligible patients are identified; new initiators of the medication form the treated group for that month’s cohort, while eligible non-initiators form the comparator group. Time zero is the same month for both groups within each cohort.
+
+---
+
+## 2. Time-alignment (new-user design)
+Time-alignment in a new-user design anchors all individuals at the moment they initiate a treatment for the first time. Comparator individuals are aligned at a corresponding “index date” that represents a similar point in their disease or care trajectory. This approach avoids bias that arises from including prevalent users, who often have different risk profiles and time-varying confounding patterns. New-user designs ensure a clean temporal order: eligibility → treatment initiation → follow-up → outcome.
+
+Example (new-user alignment):
+Patients starting a statin for the first time define their time zero at the first prescription date. Comparator patients are assigned an index date based on matching rules (e.g., calendar time, age, prior visits), aligning both groups at comparable points in care.
+
+---
+
+## 3. Time-alignment (person-time matching)
+Person-time matching aligns treated and untreated individuals based on equal amounts of prior observation time before time zero. This ensures that both groups have comparable opportunities for diagnoses, comorbidity recording, and healthcare utilization measurement. It helps control for risk-score accumulation and prior disease trajectory differences.
+
+Example (person-time matching):
+A treated patient who has 12 months of prior continuous enrollment is matched to an untreated patient who also has at least 12 months of observation. Both individuals begin follow-up at the same “person-time anchor,” improving balance in baseline information.
+
+---
+
+## 4. Time-alignment (calendar time)
+Calendar-time alignment ensures that individuals begin follow-up during the same external temporal environment. This is crucial when background risks vary due to seasonal effects, pandemics, secular trends, diagnostic practice shifts, technology rollouts, or policy changes. Aligning on calendar time reduces confounding introduced by rapidly changing healthcare or epidemiologic landscapes.
+
+Example (calendar-time alignment):
+A study aligns all individuals to a July 2021 index date because risk levels changed markedly during the COVID-19 Delta variant surge. Treated and untreated individuals initiating follow-up in that month share the same external conditions.
+
+---
+
+## Summary: Why time-alignment matters in Target Trial Emulation
+Time-alignment methods ensure that treated and untreated groups are compared at equivalent time origins, reducing biases such as immortal-time bias, selection bias, and confounding by calendar trends. Different alignment strategies serve different methodological goals: nested designs provide repeated eligibility snapshots; new-user designs enforce clean temporal ordering; person-time matching balances prior observation; calendar-time alignment controls external time-varying confounders.

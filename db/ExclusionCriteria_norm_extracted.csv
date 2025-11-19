@@ -1,0 +1,199 @@
+Criteria
+known prior exposure to MPXV before vaccination (post-exposure prophylaxis or infection)
+known prior MPXV infection before study observation period (01/07/2022)
+"history of Guillain-Barré syndrome, dementia, thrombocytopenia, bleeding disorders, alcohol abuse, or drug addiction in the year before October 1, 2018"
+"exposure to anticoagulants in the 3 weeks before October 1, 2018"
+individuals who died during the 2017–2018 and 2018–2019 influenza seasons without the date or cause of death when count <1%
+individuals who received influenza vaccine during 2017–2018 or 2018–2019 seasons lacking vaccination date when count <1%
+individuals with documentation of receiving multiple doses of Ad26.COV2.S
+individuals who received booster doses of other COVID-19 vaccines
+"missing age, sex, insurance type, or region information"
+"received influenza or COVID-19 vaccine during August 1–30, 2022 (to exclude prior season vaccination)"
+"received more than one influenza vaccine or more than one COVID-19 vaccine during August 31, 2022–July 31, 2023"
+"in influenza cohort, received COVID-19 vaccine between index date and July 31, 2023"
+"in co-admin cohort, received influenza and COVID-19 vaccines on separate days"
+received PPV23 more than 1 year before 65th birthday
+received more than two PPV23 doses
+had asplenia or chronic renal disease
+record of immunization with PCV at any point
+received PPV23 before CPRD registration date + 28 weeks (to avoid counting historical records as current)
+older adults who received PPSV-23 with non-influenza vaccines on the same day
+received non-influenza vaccines or more than two influenza vaccine doses within a year before PPSV-23 vaccination
+individuals with prespecified event occurrence before start of follow-up cohort
+followed up less than 6 months
+vaccinated not following EMA standard operating procedure recommendations
+codification errors or missing information
+vaccinated in private centers (visits not registered in VID)
+no primary care visit in the first 2 months of age
+patients admitted directly to Intensive Care Units were excluded
+"osteoarthritis, fibromyalgia, or crystalline arthritis without concomitant SARD diagnosis"
+received Ad26.COV2.S (Janssen/Johnson & Johnson vaccine)
+missing covariates for propensity score calculation
+missing symptom onset date (excluded from both PEPL and PEPF analyses)
+"for PEPL analysis: missing last exposure date, mpox disease on or before last exposure date, or JYNNEOS mpox vaccine administered before last exposure date"
+for PEPF analysis: missing first exposure date
+individuals with inconsistent first/last exposure documentation analyzed in only one of PEPL or PEPF groups with possible differing classification
+early vaccinated children (potentially severe conditions differing from general population)
+prior infected patients (to focus on vaccine immunity only)
+cases with other comorbidities excluded
+patients with primary COVID-19 diagnosis but no positive SARS-CoV-2 test excluded
+excluded 3 patients who died during first 24 hours of hospitalization
+"unreliable vaccination data (30,408"
+0.9%)
+"<1 year of continuous registration (109,524"
+3.3%)
+"health or social care worker (4,728"
+0.1%)
+"care or nursing home resident or medically housebound (162,552"
+5.1%)
+"receiving end-of-life care (50,322"
+1.7%)
+"missing demographic information (149,880"
+5.1%)
+"evidence of SARS-CoV-2 infection prior to December 8, 2020 (38,910"
+1.4%)
+record of receiving PPV23 before cohort entry
+received PPV23 more than once
+missing lot number for PPV23
+observation ended in month of cohort entry
+residency less than 1 year
+patients with progressive MS course or myelin oligodendrocyte glycoprotein-IgG associated disorder (excluded due to small sample size)
+patients who did not reside in New York (excluded to ensure reliable vaccination data capture)
+"no VA encounters in 12 months prior to vaccination (n = 133,776)"
+"residing in VA long-term care facilities (n = 16,437)"
+"evidence of SARS-CoV-2 infection prior to vaccination date (n = 87,555)"
+no mother–offspring linkage
+multiple births
+maternal membership <1 year prior
+"missing key covariates (e.g., LMP date, SES)"
+births in January–February 2021 with prenatal vaccination (bias toward preterm)
+any HZ diagnosis in prior 12 months
+"residence in nursing home, SNF, or hospice at index"
+enrollment in Medicare Part C
+missing or conflicting age or sex
+COVID-19 diagnosis or treatment 90 days prior to index through CED
+evidence of mRNA-1273.815 from 60 days prior to index through CED (except exposed on index)
+receipt of any other COVID-19 vaccine from 60 days prior to index through CED
+less than 1 day of follow-up
+missing ZIP codes
+received any RSV vaccination before trial month start
+positive RSV test within 90 days before trial month start
+positive RSV test during days 0–13 after index date (for primary analysis)
+received a non-mRNA COVID-19 vaccine up to and including index date
+received more than one mRNA vaccine dose on day 0
+received any COVID-19 vaccine during days 1–13 inclusive
+diagnosed with COVID-19 or related infectious disease during days 0–13 inclusive
+missing or unknown sex or age on index date
+missing or unknown geographic region
+test-confirmed SARS-CoV-2 infection within 90 days before index date
+received any SARS-CoV-2 vaccine within 134 days before index date (4 months + 14 days grace period)
+receiving hospice care
+patients with demographic data inconsistencies
+previously documented positive SARS-CoV-2 PCR test
+history of potential adverse event of interest
+hospital admission within 6 months prior to index date (including long-term care facility residents)
+emergency department visit within 7–90 days prior to index date
+application for Relieved Co-payment Policy within 365 days prior to index date
+"previously documented hepatitis B or C (ICD-10: B16, B17, B18)"
+"history of anaphylaxis (ICD-10: T78.2, T88.6, T78.0, T80.5) as of index date"
+contraindication to vaccination (monoclonal antibody treatment within prior 90 days or COVID-19 diagnosis within prior 30 days)
+hospitalization within prior 30 days
+"diagnosis of HIV, active cancer, dementia, or palliative care treatment within prior year"
+"systemic GDs, vasculitis, hepatitis B or C, HIV, or malignancy occurring within 5 years before enrollment"
+codes for dialysis or solid organ transplantation
+experienced outcome prior to start of outcome window (excluded from that analysis year)
+record of both vaccine brands at index date
+"vaccination against influenza between December 23, 2014 and June 30, 2015"
+received SARS-CoV-2 infection diagnosis before index date
+received a different COVID-19 vaccine prior to index date
+living in the community without a vaccination record who delayed the second dose beyond 6 weeks and did not receive three doses of either mRNA-1273 or BNT162b2
+non-immunocompromised participants who received the third dose within 5 months
+immunocompromised participants who received the third dose within 2 months
+"record of influenza vaccination between May 19 and July 31, 2019"
+"record of influenza-related medical encounter before vaccination or before September 30, 2019"
+aged ≥9 years who received two influenza vaccine doses
+"missing information on age, sex, or geographic region"
+multiple gestations (for primary outcomes)
+fetuses or infants with congenital anomalies (for primary outcomes)
+pregnancies not meeting gestational week window (20–43 weeks entirely within study period)
+not a health or social care worker
+not resident in a care or nursing home
+not medically housebound or receiving end-of-life care
+evidence of SARS-CoV-2 infection or COVID-19 within the previous 28 days
+admitted to hospital at the time of boosting
+"missing information on sex, deprivation, or Sustainability and Transformation Partnership"
+testing within 2 weeks of vaccination
+received two different types of influenza vaccine in the same season
+received a high-dose or adjuvanted influenza vaccine
+missing vaccination data
+had an immunocompromising condition
+positive test within the last 12 weeks before index date
+"excluded 141,503 persons with documented SARS-CoV-2 infection (20,105)"
+"died (34,614)"
+"received a third vaccine dose (107,156) between April 20 and September 22, 2021"
+residents who received 1-dose Ad26.COV2.S (Janssen/Johnson & Johnson) vaccine (small numbers)
+SARS-CoV-2 infection in previous 90 days
+planned discharge according to most recent assessment
+treatment with monoclonal antibodies in previous 90 days
+receiving hospice care
+received third vaccine dose before index date
+"evidence of SARS-CoV-2 infection before December 1, 2021 (VA and CMS data)"
+incongruent first and second doses of primary vaccine
+missing residential address
+"no inpatient, outpatient, or primary care encounter in VA health system in preceding 24 months"
+not assigned to a unique Veterans Integrated Services Network (VISN)
+evidence of COVID-19 infection before index date or within 13 days after index date
+receipt of heterologous COVID-19 vaccine within 365 days before or 13 days after index date
+receipt of additional homologous COVID-19 vaccine dose within 13 days after index date
+missing or unknown sex on index date
+additional details in supplementary text
+received Ad26.COV2.S (Janssen/Johnson & Johnson) vaccine at any time
+"received mixed vaccine doses (e.g., Ad26.COV2.S followed by mRNA-1273 or BNT162b2)"
+vaccine brand unspecified (unspecific vaccine codes)
+received second vaccine dose within 14 days of first dose (likely data error)
+clinically extremely vulnerable individuals
+HPV-vaccinated before study start
+congenital malformations of genitalia (ICD-10 Q50–Q56)
+chromosomal abnormalities (Q90–Q99)
+"censored if diagnosed with cancer/carcinoma in situ (C00–C99, D00–D09)"
+censored if diagnosed with hypogonadism after ovarian treatment (E89.4)
+censored if major surgical procedure on genitalia
+women who received influenza vaccination less than 2 weeks before delivery
+vaccination date outside campaign period
+conservative management
+previous hysterectomy
+persistent or progressive disease at first follow-up
+neurological or psychiatric disorders
+pregnancy
+"chronic systemic, metabolic, or autoimmune disorders"
+incomplete reports
+no consent
+diagnosed with HZ or HZO
+classified as immunocompromised within 1 year before index date
+"received only a single dose of RZV or a dose of RZV before January 1, 2018"
+HZ/HZO diagnosis between two doses
+HZ/HZO diagnosis ≤30 days after second dose
+received a combination of mRNA and viral vector vaccine doses
+"resided in a nursing home between September 1, 2020 and September 1, 2022"
+"received hospice care between September 1, 2020 and September 1, 2022"
+COVID-19 infection or diagnosis within 90 days before September 2022
+received any COVID-19 vaccination in the prior 3 months
+tested positive for SARS-CoV-2 in the prior 3 months
+received an updated COVID-19 vaccine at any time
+"documented positive polymerase chain reaction (PCR) test result for mpox before June 12, 2022"
+documented history of COVID-19 infection
+dead at the date of vaccination
+received second mRNA COVID-19 vaccine dose ≤3 days after first dose
+children <5 years of age
+recipients of non-mRNA COVID-19 vaccines
+received second dose more than 180 days after first dose
+participants becoming vaccinated during follow-up (unvaccinated control group members no longer eligible)
+participants becoming vaccinated during follow-up (unvaccinated control group members no longer eligible)
+died before the start of follow-up
+died during follow-up with no ascertained date of death
+record of previous infection
+interactions with the healthcare system within 3 days before index date
+SARS-CoV-2 infection before vaccination date
+residence in VA long-term care facilities
+individuals <18 years old
+non-Malaysian individuals with previous infection

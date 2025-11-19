@@ -1,6 +1,7 @@
 import tempfile
 import os
 import shutil
+import pandas as pd
 from typing import Any, List
 from pydantic import BaseModel
 
@@ -31,6 +32,9 @@ class Transaction(BaseModel):
         return f"{self.amount} from {self.sender} to " \
                f"{self.recipient} at {self.datetime}"
 
+class TTE_Options(BaseModel):
+    name: str
+    counts: int
 
 class Contact(BaseModel):
     name: str
@@ -83,6 +87,13 @@ def get_contacts(session_id: str) -> List[Contact]:
 def get_transactions(session_id: str):
     return [Transaction(**item) for item in read_db(session_id, TRANSACTIONS)]
 
+def get_options_for_component(session_id: str, current_component: str):
+    data = pd.read_csv('db/Final_normalize_results_Nov5_enhanced.csv')
+    if current_component not in data.columns:
+        return []
+    value_counts = data[current_component].value_counts().head(5)
+    options = [{'name': name, 'counts': int(counts)} for name, counts in value_counts.items()]
+    return [TTE_Options(**item) for item in options]
 
 def get_account(session_id: str):
     return MyAccount(**read_db(session_id, MY_ACCOUNT))

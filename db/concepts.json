@@ -1,0 +1,28 @@
+{
+  "concepts": [
+    {
+      "term": "Time-alignment (nested)",
+      "definition": "A design strategy that aligns each individual’s timeline to a shared anchor point within nested cohorts, ensuring that treatment and control comparisons use comparable follow-up starting points.",
+      "context_note": "Used in TTE studies when multiple eligibility or treatment entry points exist, allowing each nested cohort to serve as a mini-trial with consistent time zero.",
+      "example": "A study may create nested cohorts each month, aligning all eligible patients to that month’s time zero before comparing treatment initiators and non-initiators."
+    },
+    {
+      "term": "Time-alignment (new-user design)",
+      "definition": "A method that aligns individuals at the moment they newly initiate a treatment, ensuring all subjects begin follow-up at comparable stages of disease and care trajectories.",
+      "context_note": "Used in TTE studies to avoid biases from including past users, ensuring clear temporal ordering between eligibility, treatment initiation, and outcomes.",
+      "example": "Patients are aligned at their first prescription date for a medication, defining time zero as this initiation moment for both treated and comparator groups."
+    },
+    {
+      "term": "Time-alignment (person-time matching)",
+      "definition": "A matching approach that aligns treated and untreated individuals on comparable amounts of prior person-time, ensuring they have similar follow-up histories and risk periods at time zero.",
+      "context_note": "Used in TTE studies to control for differences in exposure opportunity time or disease progression before treatment assignment.",
+      "example": "A treated patient with six months of prior observation is matched to an untreated patient who also has six months of prior observation before time zero."
+    },
+    {
+      "term": "Time-alignment (calendar time)",
+      "definition": "A method that aligns individuals according to the same calendar date or period, ensuring follow-up occurs within the same external temporal context such as season, policy changes, or epidemics.",
+      "context_note": "Used in TTE studies when background risks vary over time, helping control for secular trends and time-varying confounders.",
+      "example": "All individuals beginning follow-up on July 1, 2021 are aligned to that date so that both treated and untreated groups experience the same pandemic phase."
+    }
+  ]
+}
