@@ -91,12 +91,8 @@ flows:
       - collect: eligibility_exclusioncriteria
       - collect: eligibility_computablephenotype
       - collect: eligibility_population_evaluation
-
       - id: mark_eligibility_done
         action: action_mark_component_done
-        next: check_finish
-
-      # === Check if pipeline is finished ===
       - id: check_finish
         action: action_check_finish_pipeline
         next:
