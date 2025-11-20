@@ -7,10 +7,6 @@ intents:
   - ask_concept
   - ask_options
 
-entities:
-  - pizza_type
-  - department
-
 slots:
   user_intent:
     type: categorical
