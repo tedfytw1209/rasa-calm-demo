@@ -1,14 +1,16 @@
+version: "3.14"
+
 flows:
   target_trail_emulation_qa:
     name: target trail emulation question answering
     description: Support flow to emulate target trail for QA purposes
     nlu_trigger:
-    - intent:
-        name: target_trail_emulation_qa
-        confidence_threshold: 0.5
+      - intent:
+          name: target_trail_emulation_qa
+          confidence_threshold: 0.5
     steps:
-      - id: classify_intent            # optional, but now attached to a real step
-        call: classify_user_intent     # this is the call step
+      - id: classify_intent
+        call: classify_user_intent
         next:
           - if: slots.user_intent = "pipeline"
             then: call_pipeline_assistant
@@ -19,42 +21,42 @@ flows:
           - if: slots.user_intent = "options"
             then: call_options_recommendation
           - else: call_cancel_qa
-      # The "then" above must point to step IDs in THIS flow:
+
+      # These are call steps into other flows
       - id: call_pipeline_assistant
         call: pipeline_assistant
+
       - id: call_evidence_search
         call: evidence_search
+
       - id: call_concept_explain
         call: concept_explain
+
       - id: call_options_recommendation
         call: options_recommendation
+
       - id: call_cancel_qa
-        action: utter_cancel_qa
-      - id: call_export_pipeline_json
-        call: export_pipeline_json
+        call: cancel_qa
 
   classify_user_intent:
     name: classify user intent
-    description: You are the Workflow Classifier for the TTE Protocol Builder. User intent classification for QA purposes. rag ↔ intent is evidence; define ↔ intent is concept; compare, options ↔ intent is options. Return { user_intent evidence | concept | options }
+    description: You are the Workflow Classifier for the TTE Protocol Builder. User intent classification for QA purposes. rag ↔ intent is evidence; define ↔ intent is concept; compare, options ↔ intent is options. Return { user_intent: pipeline | evidence | concept | options }
     steps:
       - collect: user_intent
-        reset_after_flow_ends: True
-        ask_before_filling: False
-      - action: utter_cancel_qa
+        reset_after_flow_ends: true
+        ask_before_filling: false
 
   evidence_search:
     name: evidence search
     description: Evidence Assistant agent. Retrieve and summarize examples from annotated TTE study data or literature (via RAG).
     steps:
       - action: action_trigger_search
-      - action: utter_cancel_qa
 
   concept_explain:
     name: concept explain
     description: Concept Explainer agent for a Target Trial Emulation (TTE) protocol. Explain the meaning of a given concept or term used in TTE studies (via RAG).
     steps:
       - action: action_trigger_search
-      - action: utter_cancel_qa
   
   options_recommendation:
     name: options recommendation
@@ -62,40 +64,53 @@ flows:
     steps:
       - action: action_options_search
       - action: utter_options_list
-      - action: utter_cancel_qa
 
   pipeline_assistant:
-      name: pipeline assistant
-      description: Pipeline Assistant agent for guiding users through the steps of building a Target Trial Emulation (TTE) protocol.
-      steps:
-        - action: utter_component_ask
-        - collect: current_component
-          ask_before_filling: true
-          next:
-            - if: slots.current_component = "eligibility"
-              then: eligibility_details
-            - else: END   # later you can route other components here
-        - id: eligibility_details
-          collect: eligibility_population
-        - collect: eligibility_inclusioncriteria
-        - collect: eligibility_exclusioncriteria
-        - collect: eligibility_computablephenotype
-        - collect: eligibility_population_evaluation
-        - action: action_mark_component_done
-        - call: check_finish_pipeline
+    name: pipeline assistant
+    description: Pipeline Assistant agent for guiding users through the steps of building a Target Trial Emulation (TTE) protocol.
+    steps:
+      # Ask which component to work on
+      - id: ask_component
+        action: utter_component_ask
 
-  check_finish_pipeline:
-      name: check finish pipeline
-      description: Check if the user has finished building the TTE protocol.
-      steps:
-        - action: action_check_finish_pipeline
-          next:
-            - if: not slots.finish
-              then: call_pipeline_assistant
-            - else: call_export_pipeline_json
+      - id: pick_component
+        collect: current_component
+        ask_before_filling: true
+        next:
+          - if: slots.current_component = "eligibility"
+            then: eligibility_details
+          # later you can add other components here
+          # - if: slots.current_component = "outcomes"
+          #   then: outcomes_details
+          - else: check_finish
 
-  export_pipeline_json:
-      name: export pipeline json
-      description: Export the constructed TTE protocol as JSON once all components are finished.
-      steps:
-        - action: action_export_protocol_json
+      # === Eligibility component details ===
+      - id: eligibility_details
+        collect: eligibility_population
+      - collect: eligibility_inclusioncriteria
+      - collect: eligibility_exclusioncriteria
+      - collect: eligibility_computablephenotype
+      - collect: eligibility_population_evaluation
+
+      - id: mark_eligibility_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
+
+      # === Check if pipeline is finished ===
+      - id: check_finish
+        action: action_check_finish_pipeline
+        next:
+          - if: not slots.finish
+            then: ask_component
+          - else: export_pipeline_json_step
+
+      # === Export protocol JSON ===
+      - id: export_pipeline_json_step
+        action: action_export_protocol_json
+
+  cancel_qa:
+    name: cancel qa
+    description: Cancel the QA session.
+    steps:
+      - action: utter_cancel_qa
