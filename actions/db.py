@@ -88,7 +88,7 @@ def get_transactions(session_id: str):
     return [Transaction(**item) for item in read_db(session_id, TRANSACTIONS)]
 
 def get_options_for_component(session_id: str, current_component: str):
-    data = pd.read_csv('db/Final_normalize_results_Nov5_enhanced.csv')
+    data = pd.read_csv('db/Final_normalize_options.csv')
     if current_component not in data.columns:
         return []
     value_counts = data[current_component].value_counts().head(5)

@@ -1,7 +1,11 @@
 version: "3.1"
 
 intents:
-  - target_trial_emulation_qa
+  - target_trial_emulation
+  - provide_pipeline
+  - provide_evidence
+  - ask_concept
+  - ask_options
 
 entities:
   - pizza_type
