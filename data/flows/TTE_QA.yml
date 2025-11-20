@@ -73,7 +73,6 @@ flows:
             - if: slots.current_component = "eligibility"
               then: eligibility_details
             - else: END
-        - id: eligibility_details
         - collect: eligibility_population
         - collect: eligibility_inclusioncriteria
         - collect: eligibility_exclusioncriteria
