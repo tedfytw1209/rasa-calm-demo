@@ -7,23 +7,24 @@ flows:
         name: target_trail_emulation_qa
         confidence_threshold: 0.5
     steps:
-    - id: classify_intent
-    - call: classify_user_intent
-      next:
-        - if: slots.user_intent = "pipeline"
-          then: pipeline_assistant
-        - if: slots.user_intent = "evidence"
-          then: evidence_search
-        - if: slots.user_intent = "concept"
-          then: concept_explain
-        - if: slots.user_intent = "options"
-          then: options_recommendation
-        - else: cancel_qa
-    - call: check_finish_pipeline
-      next:
-        - if: not slots.finish
-          then: pipeline_assistant
-        - else: classify_intent
+      - id: classify_intent            # optional, but now attached to a real step
+        call: classify_user_intent     # this is the call step
+        next:
+          - if: slots.user_intent = "pipeline"
+            then: pipeline_assistant
+          - if: slots.user_intent = "evidence"
+            then: evidence_search
+          - if: slots.user_intent = "concept"
+            then: concept_explain
+          - if: slots.user_intent = "options"
+            then: options_recommendation
+          - else: cancel_qa
+
+      - call: check_finish_pipeline
+        next:
+          - if: not slots.finish
+            then: pipeline_assistant
+          - else: export_pipeline_json
 
   classify_user_intent:
     name: classify user intent
