@@ -38,7 +38,6 @@ flows:
   evidence_search:
     name: evidence search
     description: Evidence Assistant agent. Retrieve and summarize examples from annotated TTE study data or literature (via RAG).
-    prompt_template: prompts/evidence_search.jinja2
     steps:
       - action: action_trigger_search
       - id: cancel_qa
@@ -47,7 +46,6 @@ flows:
   concept_explain:
     name: concept explain
     description: Concept Explainer agent for a Target Trial Emulation (TTE) protocol. Explain the meaning of a given concept or term used in TTE studies (via RAG).
-    prompt_template: prompts/concept_explain.jinja2
     steps:
       - action: action_trigger_search
       - id: cancel_qa
@@ -56,7 +54,6 @@ flows:
   options_recommendation:
     name: options recommendation
     description: Options Recommender agent. Recommend suitable options for various components of a Target Trial Emulation (TTE) protocol (via RAG).
-    prompt_template: prompts/options_recommendation.jinja2
     steps:
       - action: action_options_search
       - action: utter_options_list
