@@ -19,12 +19,6 @@ flows:
           - if: slots.user_intent = "options"
             then: call_options_recommendation
           - else: call_cancel_qa
-
-      - call: check_finish_pipeline
-        next:
-          - if: not slots.finish
-            then: call_pipeline_assistant
-          - else: call_export_pipeline_json
       # The "then" above must point to step IDs in THIS flow:
       - id: call_pipeline_assistant
         call: pipeline_assistant
@@ -88,12 +82,17 @@ flows:
         - collect: eligibility_computablephenotype
         - collect: eligibility_population_evaluation
         - action: action_mark_component_done
+        - call: check_finish_pipeline
 
   check_finish_pipeline:
       name: check finish pipeline
       description: Check if the user has finished building the TTE protocol.
       steps:
         - action: action_check_finish_pipeline
+          next:
+            - if: not slots.finish
+              then: call_pipeline_assistant
+            - else: call_export_pipeline_json
 
   export_pipeline_json:
       name: export pipeline json
