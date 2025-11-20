@@ -40,7 +40,7 @@ flows:
 
   classify_user_intent:
     name: classify user intent
-    description: You are the Workflow Classifier for the TTE Protocol Builder. User intent classification for QA purposes. rag ↔ intent is evidence; define ↔ intent is concept; compare, options ↔ intent is options. Return { user_intent: pipeline | evidence | concept | options }
+    description: You are the Workflow Classifier for the TTE Protocol Builder. User intent classification for QA purposes. rag ↔ intent is evidence; define ↔ intent is concept; compare, options ↔ intent is options. Return { user_intent include pipeline | evidence | concept | options }
     steps:
       - collect: user_intent
         reset_after_flow_ends: true
