@@ -42,27 +42,22 @@ slots:
     type: text
     mappings: 
       - type: from_llm
-    description: "Eligibility.Population: define the target population."
   eligibility_inclusioncriteria:
     type: list
     mappings: 
       - type: from_llm
-    description: "Eligibility.InclusionCriteria: list inclusion rules."
   eligibility_exclusioncriteria:
     type: list
     mappings: 
       - type: from_llm
-    description: "Eligibility.ExclusionCriteria: list exclusion rules."
   eligibility_computablephenotype:
     type: text
     mappings: 
       - type: from_llm
-    description: "Eligibility.ComputablePhenotype: algorithmic definition of the cohort."
   eligibility_population_evaluation:
     type: text
     mappings: 
       - type: from_llm
-    description: "Eligibility.Population Evaluation: how the population definition is evaluated."
   # Pipeline completion flags
   eligibility_done:
     type: bool
