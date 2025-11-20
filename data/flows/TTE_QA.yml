@@ -61,34 +61,34 @@ flows:
       - id: cancel_qa
         action: utter_cancel_qa
 
-pipeline_assistant:
-    name: pipeline assistant
-    description: Pipeline Assistant agent for guiding users through the steps of building a Target Trial Emulation (TTE) protocol.
-    steps:
-      - action: utter_component_ask
-      - collect: current_component
-        ask_before_filling: True
-      - id: route_component
-        next:
-          - if: slots.current_component = "eligibility"
-            then: eligibility_details
-          - else: END
-      - id: eligibility_details
-      - collect: eligibility_population
-      - collect: eligibility_inclusioncriteria
-      - collect: eligibility_exclusioncriteria
-      - collect: eligibility_computablephenotype
-      - collect: eligibility_population_evaluation
-      - action: action_mark_component_done
+  pipeline_assistant:
+      name: pipeline assistant
+      description: Pipeline Assistant agent for guiding users through the steps of building a Target Trial Emulation (TTE) protocol.
+      steps:
+        - action: utter_component_ask
+        - collect: current_component
+          ask_before_filling: True
+        - id: route_component
+          next:
+            - if: slots.current_component = "eligibility"
+              then: eligibility_details
+            - else: END
+        - id: eligibility_details
+        - collect: eligibility_population
+        - collect: eligibility_inclusioncriteria
+        - collect: eligibility_exclusioncriteria
+        - collect: eligibility_computablephenotype
+        - collect: eligibility_population_evaluation
+        - action: action_mark_component_done
 
-check_finish_pipeline:
-    name: check finish pipeline
-    description: Check if the user has finished building the TTE protocol.
-    steps:
-      - action: action_check_finish_pipeline
+  check_finish_pipeline:
+      name: check finish pipeline
+      description: Check if the user has finished building the TTE protocol.
+      steps:
+        - action: action_check_finish_pipeline
 
-export_pipeline_json:
-    name: export pipeline json
-    description: Export the constructed TTE protocol as JSON once all components are finished.
-    steps:
-      - action: action_export_protocol_json
+  export_pipeline_json:
+      name: export pipeline json
+      description: Export the constructed TTE protocol as JSON once all components are finished.
+      steps:
+        - action: action_export_protocol_json
