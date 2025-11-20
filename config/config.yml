@@ -5,7 +5,7 @@ pipeline:
   calm_entry:
     sticky: "handles everything else, including finance, doctor appointments and pizza orders"
   nlu_entry:
-    sticky: "handles only health advice, hotel reservations and restaurant bookings"
+    sticky: "handles only health advice, hotel reservations, restaurant bookings, and target trail emulation"
     non_sticky: "handles chitchat"
 - name: WhitespaceTokenizer
 - name: CountVectorsFeaturizer
