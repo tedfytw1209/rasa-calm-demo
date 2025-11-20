@@ -18,8 +18,7 @@ flows:
             then: call_concept_explain
           - if: slots.user_intent = "options"
             then: call_options_recommendation
-          - else:
-            then: utter_cancel_qa
+          - else: call_cancel_qa
 
       - call: check_finish_pipeline
         next:
@@ -35,6 +34,8 @@ flows:
         call: concept_explain
       - id: call_options_recommendation
         call: options_recommendation
+      - id: call_cancel_qa
+        action: utter_cancel_qa
       - id: call_export_pipeline_json
         call: export_pipeline_json
 
