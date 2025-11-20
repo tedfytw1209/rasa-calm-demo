@@ -33,8 +33,6 @@ pipeline:
 
 policies:
 - name: RulePolicy
-- name: TEDPolicy
-  constrain_similarities: true
 - name: FlowPolicy
 - name: EnterpriseSearchPolicy
   use_generative_llm: true         # RAG (generative) mode, default but explicit
