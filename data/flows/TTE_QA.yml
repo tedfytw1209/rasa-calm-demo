@@ -2,6 +2,10 @@ flows:
   target_trail_emulation_qa:
     name: target trail emulation question answering
     description: Support flow to emulate target trail for QA purposes
+    nlu_trigger:
+    - intent:
+        name: target_trail_emulation_qa
+        confidence_threshold: 0.5
     steps:
     - id: classify_intent
     - call: classify_user_intent
