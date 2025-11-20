@@ -113,7 +113,7 @@ slots:
 responses:
   utter_options_list:
     - text: "Your current options of {current_component} are:\n {options_list}"
-  utter_cancel_order:
+  utter_cancel_qa:
     - text: QA has been cancelled.
   utter_component_ask:
     - text: "Which component would you like to work on next? Your options are: objectives, eligibility, treatment_strategies, treatment_assignment, outcomes, follow_up, causal_contrasts, statistical_analysis."
