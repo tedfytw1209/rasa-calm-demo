@@ -11,20 +11,33 @@ flows:
         call: classify_user_intent     # this is the call step
         next:
           - if: slots.user_intent = "pipeline"
-            then: pipeline_assistant
+            then: call_pipeline_assistant
           - if: slots.user_intent = "evidence"
-            then: evidence_search
+            then: call_evidence_search
           - if: slots.user_intent = "concept"
-            then: concept_explain
+            then: call_concept_explain
           - if: slots.user_intent = "options"
-            then: options_recommendation
-          - else: cancel_qa
+            then: call_options_recommendation
+          - else: call_cancel_qa
 
       - call: check_finish_pipeline
         next:
           - if: not slots.finish
-            then: pipeline_assistant
-          - else: export_pipeline_json
+            then: call_pipeline_assistant
+          - else: call_export_pipeline_json
+      # The "then" above must point to step IDs in THIS flow:
+      - id: call_pipeline_assistant
+        call: pipeline_assistant
+      - id: call_evidence_search
+        call: evidence_search
+      - id: call_concept_explain
+        call: concept_explain
+      - id: call_options_recommendation
+        call: options_recommendation
+      - id: call_cancel_qa
+        call: cancel_qa
+      - id: call_export_pipeline_json
+        call: export_pipeline_json
 
   classify_user_intent:
     name: classify user intent
