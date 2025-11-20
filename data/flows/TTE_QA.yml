@@ -18,7 +18,8 @@ flows:
             then: call_concept_explain
           - if: slots.user_intent = "options"
             then: call_options_recommendation
-          - else: call_cancel_qa
+          - else:
+            then: utter_cancel_qa
 
       - call: check_finish_pipeline
         next:
@@ -34,8 +35,6 @@ flows:
         call: concept_explain
       - id: call_options_recommendation
         call: options_recommendation
-      - id: call_cancel_qa
-        call: cancel_qa
       - id: call_export_pipeline_json
         call: export_pipeline_json
 
@@ -46,24 +45,21 @@ flows:
       - collect: user_intent
         reset_after_flow_ends: True
         ask_before_filling: False
-      - id: cancel_qa
-        action: utter_cancel_qa
+      - action: utter_cancel_qa
 
   evidence_search:
     name: evidence search
     description: Evidence Assistant agent. Retrieve and summarize examples from annotated TTE study data or literature (via RAG).
     steps:
       - action: action_trigger_search
-      - id: cancel_qa
-        action: utter_cancel_qa
+      - action: utter_cancel_qa
 
   concept_explain:
     name: concept explain
     description: Concept Explainer agent for a Target Trial Emulation (TTE) protocol. Explain the meaning of a given concept or term used in TTE studies (via RAG).
     steps:
       - action: action_trigger_search
-      - id: cancel_qa
-        action: utter_cancel_qa
+      - action: utter_cancel_qa
   
   options_recommendation:
     name: options recommendation
@@ -71,8 +67,7 @@ flows:
     steps:
       - action: action_options_search
       - action: utter_options_list
-      - id: cancel_qa
-        action: utter_cancel_qa
+      - action: utter_cancel_qa
 
   pipeline_assistant:
       name: pipeline assistant
