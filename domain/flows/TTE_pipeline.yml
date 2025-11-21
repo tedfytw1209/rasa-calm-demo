@@ -89,8 +89,6 @@ responses:
   utter_component_ask:
     - text: "Which component would you like to work on next? Your options are: objectives, eligibility, treatment_strategies, treatment_assignment, outcomes, follow_up, causal_contrasts, statistical_analysis."
   # ---- Eligibility ----
-  utter_ask_user_intent:
-    - text: "What kind of help do you need? You can say: pipeline, evidence, concept, or options."
   utter_ask_current_component:
     - text: "Which protocol component do you want to work on now? For example: eligibility, treatment_assignment, outcomes, follow_up, etc."
   utter_ask_eligibility_population:
