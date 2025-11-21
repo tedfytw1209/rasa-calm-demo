@@ -24,7 +24,7 @@ responses:
 
   # ---- NEW ask responses for collect steps ----
   utter_ask_user_intent:
-    - text: "What kind of help do you need? You can say: pipeline, evidence, concept, or options."
+    - text: "What kind of help do you need? You can say: evidence, concept, or options."
 
 actions:
   - action_options_search

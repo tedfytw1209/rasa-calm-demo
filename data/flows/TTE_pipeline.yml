@@ -12,7 +12,6 @@ flows:
       # Ask which component to work on
       - id: ask_component
         action: utter_component_ask
-
       - id: pick_component
         collect: current_component
         ask_before_filling: true
