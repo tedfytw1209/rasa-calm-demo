@@ -47,12 +47,18 @@ flows:
     name: concept explain
     description: Concept Explainer agent for a Target Trial Emulation (TTE) protocol. Explain the meaning of a given concept or term used in TTE studies (via RAG).
     steps:
+      - collect: concept_to_explain
+        reset_after_flow_ends: true
+        ask_before_filling: false
       - action: action_trigger_search
   
   options_recommendation:
     name: options recommendation
     description: Options Recommender agent. Recommend suitable options for various components of a Target Trial Emulation (TTE) protocol (via RAG).
     steps:
+      - collect: component
+        reset_after_flow_ends: false
+        ask_before_filling: false
       - action: action_options_search
       - action: utter_options_list
 

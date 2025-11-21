@@ -12,7 +12,7 @@ class OptionsSearch(Action):
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker, domain: Dict[str, Any]):
-        current_component = tracker.slots.get("current_component")
-        options = get_options_for_component(tracker.sender_id, current_component)
+        component = tracker.slots.get("component")
+        options = get_options_for_component(tracker.sender_id, component)
         options_list = "\n".join([o.stringify() for o in options])
         return [SlotSet("options_list", options_list)]

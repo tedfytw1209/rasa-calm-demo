@@ -15,10 +15,18 @@ slots:
       - options
     mappings:
         - type: from_llm
+  concept_to_explain:
+    type: text
+    mappings:
+      - type: from_llm
+  component:
+    type: text
+    mappings:
+      - type: from_llm
 
 responses:
   utter_options_list:
-    - text: "Your current options of {current_component} are:\n {options_list}"
+    - text: "Your current options of {component} are:\n {options_list}"
   utter_cancel_qa:
     - text: QA has been cancelled.
 
