@@ -76,12 +76,14 @@ flows:
       - collect: tte_field
         reset_after_flow_ends: false
         ask_before_filling: false
-      - action: action_options_search
+      - id: run_option_search
+        action: action_options_search
         next:
-          - if: "slots.option_search_finish == true"
-            then: END
-          - else: call_options_recommendation
-      - action: utter_options_list
+          - if: slots.option_search_finish = true
+            then: show_options
+          - else: END
+      - id: show_options
+        action: utter_options_list
         next: END
 
   cancel_qa:
