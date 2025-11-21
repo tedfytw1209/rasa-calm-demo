@@ -33,74 +33,67 @@ slots:
     mappings:
       - type: from_llm
   tte_field:
-    type: text
+    type: categorical
+    values:
+      - eligibility.Population
+      - eligibility.InclusionCriteria_norm
+      - eligibility.ExclusionCriteria_norm
+      - eligibility.Computablephenotype
+      - eligibility.Population Evaluation
+      - treatment_strategies.TreatmentGroup
+      - treatment_strategies.ClinicalDomain
+      - treatment_strategies.DoseSchedule
+      - treatment_strategies.DoseSchedule_norm
+      - treatment_strategies.identify the exposure
+      - treatment_strategies.definitions of vaccinated status
+      - treatment_strategies.Context
+      - treatment_strategies.ComparatorGroup
+      - treatment_strategies.ComparatorDetails
+      - treatment_strategies.ExposureValidation
+      - treatment_strategies.GracePeriod
+      - treatment_assignment.IndexDate_norm
+      - treatment_assignment.Methods.Final
+      - treatment_assignment.MatchingCaliper
+      - treatment_assignment.PsVariables
+      - treatment_assignment.ConfounderSelection
+      - treatment_assignment.Observation Period
+      - treatment_assignment.SmdAfterEmulation
+      - treatment_assignment.SmdDetails
+      - treatment_assignment.UnmeasuredConfounders
+      - treatment_assignment.UnmeasuredConfounders Model
+      - treatment_assignment.Timealignment.Final
+      - outcomes.PrimaryOutcome
+      - outcomes.outcomes definations
+      - outcomes.Validation
+      - outcomes.Codes
+      - outcomes.CompetingRisks
+      - outcomes.NegativeControls
+      - outcomes.SecondaryOutcomes
+      - outcomes.Secondary defination
+      - outcomes.SafetyOutcomes
+      - follow_up.Start
+      - follow_up.lag time
+      - follow_up.End
+      - follow_up.CensoringRules
+      - follow_up.TreatmentSwitching
+      - follow_up.MedianTime
+      - causal_contrasts.AnalysisApproach.Final
+      - statistical_analysis.Models.Final
+      - statistical_analysis.EffectMetrics.Final
+      - statistical_analysis.SensitivityAnalyses
+      - statistical_analysis.SubgroupAnalyses
+      - statistical_analysis.SubgroupModel
+      - statistical_analysis.MissingDataApproach
+      - statistical_analysis.MissingDataApproachOther
+      - statistical_analysis.Multiplicity
+      - statistical_analysis.Software
     mappings:
       - type: from_llm
         llm_config:
           description: >
             TTE subcomponent key for options recommendation.
-            Map the user's question to exactly ONE of the following keys
-            (return only the key string, nothing else):
-
-            eligibility.Population
-            eligibility.InclusionCriteria_norm
-            eligibility.ExclusionCriteria_norm
-            eligibility.Computablephenotype
-            eligibility.Population Evaluation
-
-            treatment_strategies.TreatmentGroup
-            treatment_strategies.ClinicalDomain
-            treatment_strategies.DoseSchedule
-            treatment_strategies.DoseSchedule_norm
-            treatment_strategies.identify the exposure
-            treatment_strategies.definitions of vaccinated status
-            treatment_strategies.Context
-            treatment_strategies.ComparatorGroup
-            treatment_strategies.ComparatorDetails
-            treatment_strategies.ExposureValidation
-            treatment_strategies.GracePeriod
-
-            treatment_assignment.IndexDate
-            treatment_assignment.IndexDate_norm
-            treatment_assignment.Methods.Final
-            treatment_assignment.MatchingCaliper
-            treatment_assignment.PsVariables
-            treatment_assignment.ConfounderSelection
-            treatment_assignment.Observation Period
-            treatment_assignment.SmdAfterEmulation
-            treatment_assignment.SmdDetails
-            treatment_assignment.UnmeasuredConfounders
-            treatment_assignment.UnmeasuredConfounders Model
-            treatment_assignment.TTimealignment.Final
-
-            outcomes.PrimaryOutcome
-            outcomes.outcomes definations
-            outcomes.Validation
-            outcomes.Codes
-            outcomes.CompetingRisks
-            outcomes.NegativeControls
-            outcomes.SecondaryOutcomes
-            outcomes.Secondary defination
-            outcomes.SafetyOutcomes
-
-            follow_up.Start
-            follow_up.lag time
-            follow_up.End
-            follow_up.CensoringRules
-            follow_up.TreatmentSwitching
-            follow_up.MedianTime
-
-            causal_contrasts.AnalysisApproach.Final
-
-            statistical_analysis.Models.Final
-            statistical_analysis.EffectMetrics.Final
-            statistical_analysis.SensitivityAnalyses
-            statistical_analysis.SubgroupAnalyses
-            statistical_analysis.SubgroupModel
-            statistical_analysis.MissingDataApproach
-            statistical_analysis.MissingDataApproachOther
-            statistical_analysis.Multiplicity
-            statistical_analysis.Software
+            Map the user's question to exactly ONE of the value.
+            (return only the key string, nothing else)
 
 responses:
   utter_options_list:

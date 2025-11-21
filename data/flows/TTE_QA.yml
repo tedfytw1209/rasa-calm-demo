@@ -82,7 +82,7 @@ flows:
         next:
           - if: slots.option_search_finish = true
             then: show_options
-          - else: END
+          - else: fill_tte_field
       - id: show_options
         action: utter_options_list
         next: END
