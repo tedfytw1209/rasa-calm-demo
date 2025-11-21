@@ -73,7 +73,8 @@ flows:
           name: tte_options_recommendation
           confidence_threshold: 0.5
     steps:
-      - collect: tte_field
+      - id: fill_tte_field
+        collect: tte_field
         reset_after_flow_ends: true
         ask_before_filling: false
       - id: run_option_search
