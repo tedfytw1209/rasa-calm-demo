@@ -30,6 +30,30 @@ flows:
             then: causal_contrasts_details
           - if: slots.current_component = "statistical_analysis"
             then: statistical_analysis_details
+          - if: slots.current_component = "finish"
+            then: export_pipeline_json_step
+          - else: compute_next_component
+      - id: compute_next_component
+        action: action_next_component
+        next:
+          - if: slots.next_component = "objectives"
+            then: objectives_details
+          - if: slots.next_component = "eligibility"
+            then: eligibility_details
+          - if: slots.next_component = "treatment_strategies"
+            then: treatment_strategies_details
+          - if: slots.next_component = "treatment_assignment"
+            then: treatment_assignment_details
+          - if: slots.next_component = "outcomes"
+            then: outcomes_details
+          - if: slots.next_component = "follow_up"
+            then: follow_up_details
+          - if: slots.next_component = "causal_contrasts"
+            then: causal_contrasts_details
+          - if: slots.next_component = "statistical_analysis"
+            then: statistical_analysis_details
+          - if: slots.next_component = "finish"
+            then: export_pipeline_json_step
           - else: check_finish
       # === Objectives component details ===
       - id: objectives_details
@@ -58,7 +82,6 @@ flows:
       - collect: treatment_strategies_doseschedule
       - collect: treatment_strategies_identify_the_exposure
       - collect: treatment_strategies_definitions_of_vaccinated_status
-      - collect: treatment_strategies_context
       - collect: treatment_strategies_comparatorgroup
       - collect: treatment_strategies_comparatordetails
       - collect: treatment_strategies_exposurevalidation
@@ -89,8 +112,6 @@ flows:
       - collect: outcomes_codes
       - collect: outcomes_competingrisks
       - collect: outcomes_negativecontrols
-      - collect: outcomes_secondaryoutcomes
-      - collect: outcomes_secondary_defination
       - collect: outcomes_safetyoutcomes
       - id: mark_outcomes_done
         action: action_mark_component_done
@@ -103,7 +124,6 @@ flows:
       - collect: follow_up_end
       - collect: follow_up_censoringrules
       - collect: follow_up_treatmentswitching
-      - collect: follow_up_mediantime
       - id: mark_follow_up_done
         action: action_mark_component_done
         next:
@@ -130,7 +150,12 @@ flows:
       - collect: statistical_analysis_subgroupanalyses
       - collect: statistical_analysis_subgroupmodel
       - collect: statistical_analysis_missingdataapproach
-      - collect: statistical_analysis_missingdataapproachother
+        next:
+          - if: slots.statistical_analysis_missingdataapproach matches "other"
+            then: statistical_analysis_missingdataapproach_other_collect
+          - else: mark_statistical_analysis_done
+      - id: statistical_analysis_missingdataapproach_other_collect
+        collect: statistical_analysis_missingdataapproachother
       - collect: statistical_analysis_software
       - id: mark_statistical_analysis_done
         action: action_mark_component_done

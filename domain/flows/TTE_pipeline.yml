@@ -15,8 +15,15 @@ slots:
       - follow_up
       - causal_contrasts
       - statistical_analysis
+      - finish
+      - else
     mappings:
       - type: from_llm
+  next_component:
+    type: text
+    initial_value: "objectives"   # default next component
+    mappings:
+      - type: custom
   # ==== Objectives ====
   objectives_objectives:
     type: text
@@ -70,10 +77,6 @@ slots:
     mappings:
       - type: from_llm
   treatment_strategies_definitions_of_vaccinated_status:
-    type: text
-    mappings:
-      - type: from_llm
-  treatment_strategies_context:
     type: text
     mappings:
       - type: from_llm
@@ -133,14 +136,6 @@ slots:
     type: text
     mappings:
       - type: from_llm
-  outcomes_secondaryoutcomes:
-    type: text
-    mappings:
-      - type: from_llm
-  outcomes_secondary_defination:
-    type: text
-    mappings:
-      - type: from_llm
   outcomes_safetyoutcomes:
     type: text
     mappings:
@@ -164,10 +159,6 @@ slots:
     mappings:
       - type: from_llm
   follow_up_treatmentswitching:
-    type: text
-    mappings:
-      - type: from_llm
-  follow_up_mediantime:
     type: text
     mappings:
       - type: from_llm

@@ -48,15 +48,11 @@ class ActionCheckFinishPipeline(Action):
             )
         else:
             next_component = unfinished_components[0]
-            events.append(SlotSet("current_component", next_component))
-            events.append(
-                SlotSet("unfinished_components", ", ".join(unfinished_components))
-            )
-
+            events.append(SlotSet("next_component", next_component))
             dispatcher.utter_message(
                 text=(
-                    "Some components are still incomplete. "
-                    f"Unfinished components: {', '.join(unfinished_components)}."
+                    "Some components are still incomplete.\n"
+                    f"{', '.join(unfinished_components)}."
                 )
             )
 

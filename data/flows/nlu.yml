@@ -132,7 +132,6 @@ nlu:
 
   - intent: target_trail_emulation_pipeline
     examples: |
-      - How should I design my TTE study?
       - Help me complete the statistical analysis section.
       - I want to build my target trial protocol step by step.
       - Can you guide me through constructing a TTE protocol?

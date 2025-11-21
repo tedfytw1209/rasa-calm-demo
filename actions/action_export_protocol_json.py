@@ -1,3 +1,5 @@
+import os
+from datetime import datetime
 from typing import Any, Dict, List, Text
 
 from rasa_sdk import Action, Tracker
@@ -45,7 +47,6 @@ class ActionExportProtocolJson(Action):
                 "dose_schedule": tracker.get_slot("treatment_strategies_doseschedule"),
                 "identify_the_exposure": tracker.get_slot("treatment_strategies_identify_the_exposure"),
                 "definitions_of_vaccinated_status": tracker.get_slot("treatment_strategies_definitions_of_vaccinated_status"),
-                "context": tracker.get_slot("treatment_strategies_context"),
                 "comparator_group": tracker.get_slot("treatment_strategies_comparatorgroup"),
                 "comparator_details": tracker.get_slot("treatment_strategies_comparatordetails"),
                 "exposure_validation": tracker.get_slot("treatment_strategies_exposurevalidation"),
@@ -63,8 +64,6 @@ class ActionExportProtocolJson(Action):
                 "codes": tracker.get_slot("outcomes_codes"),
                 "competing_risks": tracker.get_slot("outcomes_competingrisks"),
                 "negative_controls": tracker.get_slot("outcomes_negativecontrols"),
-                "secondary_outcomes": tracker.get_slot("outcomes_secondaryoutcomes"),
-                "secondary_definition": tracker.get_slot("outcomes_secondary_defination"),
                 "safety_outcomes": tracker.get_slot("outcomes_safetyoutcomes"),
             },
             "follow_up": {
@@ -73,7 +72,6 @@ class ActionExportProtocolJson(Action):
                 "end": tracker.get_slot("follow_up_end"),
                 "censoring_rules": tracker.get_slot("follow_up_censoringrules"),
                 "treatment_switching": tracker.get_slot("follow_up_treatmentswitching"),
-                "median_time": tracker.get_slot("follow_up_mediantime"),
             },
             "causal_contrasts": {
                 "analysis_approach": tracker.get_slot("causal_contrasts_analysisapproach"),
@@ -91,9 +89,24 @@ class ActionExportProtocolJson(Action):
             },
         }
 
+        # ---------- Convert to JSON string (UTF-8 safe) ----------
         json_str = json.dumps(protocol, indent=2, ensure_ascii=False)
+
+        # ---------- Create filename with timestamp ----------
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"TTE_{timestamp}.json"
+
+        # ---------- Save JSON file ----------
+        save_path = os.path.join(os.getcwd(), filename)
+        with open(save_path, "w", encoding="utf-8") as f:
+            f.write(json_str)
+
+        # ---------- Notify user ----------
         dispatcher.utter_message(
-            text=f"Here is your completed TTE protocol JSON:\n```json\n{json_str}\n```"
+            text=(
+                f"Your TTE protocol has been exported successfully!\n"
+                f"**File:** `{filename}`\n"
+            )
         )
 
         return []
