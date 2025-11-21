@@ -23,6 +23,10 @@ slots:
     type: text
     mappings:
       - type: from_llm
+  options_list:
+    type: text
+    mappings:
+      - type: from_llm
 
 responses:
   utter_options_list:
