@@ -146,7 +146,6 @@ nlu:
       - Please help me define my study population and inclusion criteria.
       - I want to describe my exposure and comparator strategies for TTE.
 
-nlu:
   # 1) General QA – user just “asks something about TTE”, not specifying mode
   - intent: target_trail_emulation_qa
     examples: |
