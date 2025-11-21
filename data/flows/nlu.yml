@@ -150,7 +150,6 @@ nlu:
     examples: |
       - How do I define the eligibility criteria for my target trial?
       - What does time alignment mean in a target trial emulation?
-      - Explain the concept of immortal time bias.
       - Show me examples of eligibility definitions from published TTE studies.
       - What are some options for selecting comparator groups in an emulated trial?
       - I need evidence on how other studies define their index date.

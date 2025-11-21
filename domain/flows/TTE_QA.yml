@@ -40,4 +40,3 @@ responses:
 
 actions:
   - action_options_search
-  - action_trigger_search

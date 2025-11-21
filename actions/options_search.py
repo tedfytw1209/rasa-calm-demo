@@ -8,7 +8,7 @@ from actions.db import get_options_for_component
 class OptionsSearch(Action):
 
     def name(self) -> str:
-        return "options_search"
+        return "action_options_search"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker, domain: Dict[str, Any]):
