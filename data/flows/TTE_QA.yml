@@ -67,7 +67,7 @@ flows:
   
   options_recommendation:
     name: options recommendation
-    description: Options Recommender agent. Recommend suitable options for various fields of a Target Trial Emulation (TTE).
+    description: Options Recommender agent. Recommend suitable options for a field in Target Trial Emulation (TTE).
     nlu_trigger:
       - intent:
           name: tte_options_recommendation
