@@ -1,8 +1,7 @@
 version: "3.1"
 
 intents:
-  - target_trial_emulation
-  - provide_pipeline
+  - target_trail_emulation_pipeline
 
 slots:
   current_component:
@@ -18,25 +17,203 @@ slots:
       - statistical_analysis
     mappings:
       - type: from_llm
+  # ==== Objectives ====
+  objectives_objectives:
+    type: text
+    mappings:
+      - type: from_llm
+  objectives_samplesize:
+    type: text
+    mappings:
+      - type: from_llm
+  objectives_datasourcetype:
+    type: text
+    mappings:
+      - type: from_llm
+  # ==== Eligibility ====
   eligibility_population:
     type: text
-    mappings: 
+    mappings:
       - type: from_llm
   eligibility_inclusioncriteria:
     type: text
-    mappings: 
+    mappings:
       - type: from_llm
   eligibility_exclusioncriteria:
     type: text
-    mappings: 
+    mappings:
       - type: from_llm
   eligibility_computablephenotype:
     type: text
-    mappings: 
+    mappings:
       - type: from_llm
   eligibility_population_evaluation:
     type: text
-    mappings: 
+    mappings:
+      - type: from_llm
+
+  # ==== Treatment strategies ====
+  treatment_strategies_treatmentgroup:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_clinicaldomain:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_doseschedule:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_identify_the_exposure:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_definitions_of_vaccinated_status:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_context:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_comparatorgroup:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_comparatordetails:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_exposurevalidation:
+    type: text
+    mappings:
+      - type: from_llm
+  treatment_strategies_graceperiod:
+    type: text
+    mappings:
+      - type: from_llm
+
+  # ==== Treatment assignment ====
+  index_date:
+    type: text
+    mappings:
+      - type: from_llm
+  timealignment:
+    type: text       # "standard", "other", etc. Flow uses `matches "other"`
+    mappings:
+      - type: from_llm
+  timealignment_other:
+    type: text
+    mappings:
+      - type: from_llm
+
+  # ==== Outcomes ====
+  outcomes_primaryoutcome:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_outcomes_definations:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_validation:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_codes:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_competingrisks:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_negativecontrols:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_secondaryoutcomes:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_secondary_defination:
+    type: text
+    mappings:
+      - type: from_llm
+  outcomes_safetyoutcomes:
+    type: text
+    mappings:
+      - type: from_llm
+
+  # ==== Follow-up ====
+  follow_up_start:
+    type: text
+    mappings:
+      - type: from_llm
+  follow_up_lag_time:
+    type: text
+    mappings:
+      - type: from_llm
+  follow_up_end:
+    type: text
+    mappings:
+      - type: from_llm
+  follow_up_censoringrules:
+    type: text
+    mappings:
+      - type: from_llm
+  follow_up_treatmentswitching:
+    type: text
+    mappings:
+      - type: from_llm
+  follow_up_mediantime:
+    type: text
+    mappings:
+      - type: from_llm
+
+  # ==== Causal contrasts ====
+  causal_contrasts_analysisapproach:
+    type: text       # e.g. "ITT", "per-protocol", "other"
+    mappings:
+      - type: from_llm
+  causal_contrasts_other:
+    type: text
+    mappings:
+      - type: from_llm
+
+  # ==== Statistical analysis ====
+  statistical_analysis_models:
+    type: text
+    mappings:
+      - type: from_llm
+  statistical_analysis_effectmetrics:
+    type: text
+    mappings:
+      - type: from_llm
+  statistical_analysis_sensitivityanalyses:
+    type: text
+    mappings:
+      - type: from_llm
+  statistical_analysis_subgroupanalyses:
+    type: text
+    mappings:
+      - type: from_llm
+  statistical_analysis_subgroupmodel:
+    type: text
+    mappings:
+      - type: from_llm
+  statistical_analysis_missingdataapproach:
+    type: text
+    mappings:
+      - type: from_llm
+  statistical_analysis_missingdataapproachother:
+    type: text
+    mappings:
+      - type: from_llm
+  statistical_analysis_software:
+    type: text
+    mappings:
       - type: from_llm
   # Pipeline completion flags
   eligibility_done:
@@ -87,18 +264,109 @@ slots:
 
 responses:
   utter_ask_current_component:
-    - text: "Which TTE protocol component do you want to work on now? For example: eligibility, treatment_assignment, outcomes, follow_up, etc."
-  # ---- Eligibility ----
+    - text: "Which TTE protocol component do you want to work on now?"
+  # ==== Objectives ====
+  utter_ask_objectives_objectives:
+    - text: "Please describe the primary objectives of the study."
+  utter_ask_objectives_samplesize:
+    - text: "What is the estimated or target sample size for this study?"
+  utter_ask_objectives_datasourcetype:
+    - text: "What type of data source will you use (e.g., EHR, insurance claims, registry)?"
+  # ==== Eligibility ====
   utter_ask_eligibility_population:
-    - text: "Please describe the target population for your study’s eligibility criteria."
+    - text: "Please describe the target population for eligibility."
   utter_ask_eligibility_inclusioncriteria:
-    - text: "Please list the inclusion criteria for your study."
+    - text: "Please list the inclusion criteria."
   utter_ask_eligibility_exclusioncriteria:
-    - text: "Please list the exclusion criteria for your study."
+    - text: "Please list the exclusion criteria."
   utter_ask_eligibility_computablephenotype:
-    - text: "Please describe the computable phenotype (codes/algorithms) that define eligibility."
+    - text: "Describe the computable phenotype (codes/algorithms) for eligibility."
   utter_ask_eligibility_population_evaluation:
-    - text: "How will you evaluate or validate that your population definition works as intended?"
+    - text: "How will you evaluate or validate the population definition?"
+  # ==== Treatment strategies ====
+  utter_ask_treatment_strategies_treatmentgroup:
+    - text: "Describe the treatment group definition."
+  utter_ask_treatment_strategies_clinicaldomain:
+    - text: "What is the clinical domain of the treatment?"
+  utter_ask_treatment_strategies_doseschedule:
+    - text: "Describe the dose and schedule for the treatment."
+  utter_ask_treatment_strategies_identify_the_exposure:
+    - text: "How do you identify the exposure in your data?"
+  utter_ask_treatment_strategies_definitions_of_vaccinated_status:
+    - text: "How do you define vaccinated status?"
+  utter_ask_treatment_strategies_context:
+    - text: "Provide the clinical/healthcare context for the treatment."
+  utter_ask_treatment_strategies_comparatorgroup:
+    - text: "Describe the comparator group."
+  utter_ask_treatment_strategies_comparatordetails:
+    - text: "Provide details about the comparator group."
+  utter_ask_treatment_strategies_exposurevalidation:
+    - text: "How is the exposure definition validated?"
+  utter_ask_treatment_strategies_graceperiod:
+    - text: "Describe any grace period used for treatment initiation."
+  # ==== Treatment assignment ====
+  utter_ask_index_date:
+    - text: "Describe the index date definition for treatment assignment."
+  utter_ask_timealignment:
+    - text: >
+        Describe the time alignment strategy (e.g., nested, new-user, person-time matching,
+        calendar-time matching, or other). You can also answer 'other'.
+  utter_ask_timealignment_other:
+    - text: "Please describe the 'other' time alignment approach in detail."
+  # ==== Outcomes ====
+  utter_ask_outcomes_primaryoutcome:
+    - text: "Describe the primary outcome."
+  utter_ask_outcomes_outcomes_definations:
+    - text: "Provide operational definitions for the outcomes."
+  utter_ask_outcomes_validation:
+    - text: "How are the outcomes validated?"
+  utter_ask_outcomes_codes:
+    - text: "List or describe the codes used to define outcomes."
+  utter_ask_outcomes_competingrisks:
+    - text: "Describe any competing risks considered."
+  utter_ask_outcomes_negativecontrols:
+    - text: "List any negative control outcomes, if used."
+  utter_ask_outcomes_secondaryoutcomes:
+    - text: "Describe the secondary outcomes."
+  utter_ask_outcomes_secondary_defination:
+    - text: "Provide operational definitions for secondary outcomes."
+  utter_ask_outcomes_safetyoutcomes:
+    - text: "Describe safety outcomes, if applicable."
+  # ==== Follow-up ====
+  utter_ask_follow_up_start:
+    - text: "When does follow-up start in your design?"
+  utter_ask_follow_up_lag_time:
+    - text: "Describe any lag time between index and follow-up start."
+  utter_ask_follow_up_end:
+    - text: "When does follow-up end?"
+  utter_ask_follow_up_censoringrules:
+    - text: "Describe censoring rules used in follow-up."
+  utter_ask_follow_up_treatmentswitching:
+    - text: "How will you handle treatment switching?"
+  utter_ask_follow_up_mediantime:
+    - text: "If relevant, describe the median follow-up time."
+  # ==== Causal contrasts ====
+  utter_ask_causal_contrasts_analysisapproach:
+    - text: Describe the causal contrast / analysis approach (e.g., ITT, per-protocol, as-treated, or 'other').
+  utter_ask_causal_contrasts_other:
+    - text: "Please describe the 'other' analysis approach in detail."
+  # ==== Statistical analysis ====
+  utter_ask_statistical_analysis_models:
+    - text: "Which statistical models will you use (e.g., Cox, logistic, etc.)?"
+  utter_ask_statistical_analysis_effectmetrics:
+    - text: "Which effect measures will you report (e.g., HR, RR, OR, VE)?"
+  utter_ask_statistical_analysis_sensitivityanalyses:
+    - text: "Describe planned sensitivity analyses."
+  utter_ask_statistical_analysis_subgroupanalyses:
+    - text: "Describe planned subgroup analyses."
+  utter_ask_statistical_analysis_subgroupmodel:
+    - text: "Describe how subgroup analyses will be modeled."
+  utter_ask_statistical_analysis_missingdataapproach:
+    - text: "Describe your approach to handling missing data."
+  utter_ask_statistical_analysis_missingdataapproachother:
+    - text: "Describe any additional or 'other' missing data approaches."
+  utter_ask_statistical_analysis_software:
+    - text: "Which software will you use for the analysis?"
 
 actions:
   - action_mark_component_done

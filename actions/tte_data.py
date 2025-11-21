@@ -2,6 +2,11 @@ from typing import Any, Dict, List, Text
 
 # High-level grouping: component -> list of CSV columns (as before)
 COMPONENT_TO_COLUMNS: Dict[str, List[str]] = {
+    "objectives": [
+        "Objectives",
+        "SampleSize",
+        "DataSourceType",
+    ],
     "eligibility": [
         "Population",
         "InclusionCriteria_norm",

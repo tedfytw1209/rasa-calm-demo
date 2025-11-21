@@ -14,13 +14,32 @@ flows:
         collect: current_component
         ask_before_filling: true
         next:
+          - if: slots.current_component = "objectives"
+            then: objectives_details
           - if: slots.current_component = "eligibility"
             then: eligibility_details
-          # later you can add other components here
-          # - if: slots.current_component = "outcomes"
-          #   then: outcomes_details
+          - if: slots.current_component = "treatment_strategies"
+            then: treatment_strategies_details
+          - if: slots.current_component = "treatment_assignment"
+            then: treatment_assignment_details
+          - if: slots.current_component = "outcomes"
+            then: outcomes_details
+          - if: slots.current_component = "follow_up"
+            then: follow_up_details
+          - if: slots.current_component = "causal_contrasts"
+            then: causal_contrasts_details
+          - if: slots.current_component = "statistical_analysis"
+            then: statistical_analysis_details
           - else: check_finish
-
+      # === Objectives component details ===
+      - id: objectives_details
+        collect: objectives_objectives
+      - collect: objectives_samplesize
+      - collect: objectives_datasourcetype
+      - id: mark_objectives_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
       # === Eligibility component details ===
       - id: eligibility_details
         collect: eligibility_population
@@ -30,6 +49,92 @@ flows:
       - collect: eligibility_population_evaluation
       - id: mark_eligibility_done
         action: action_mark_component_done
+      # === Treatment strategies component ===
+      - id: treatment_strategies_details
+        collect: treatment_strategies_treatmentgroup
+      - collect: treatment_strategies_clinicaldomain
+      - collect: treatment_strategies_doseschedule
+      - collect: treatment_strategies_identify_the_exposure
+      - collect: treatment_strategies_definitions_of_vaccinated_status
+      - collect: treatment_strategies_context
+      - collect: treatment_strategies_comparatorgroup
+      - collect: treatment_strategies_comparatordetails
+      - collect: treatment_strategies_exposurevalidation
+      - collect: treatment_strategies_graceperiod
+      - id: mark_treatment_strategies_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
+      # === treatment assignment component details ===
+      - id: treatment_assignment_details
+        collect: index_date
+      - collect: timealignment
+        next:
+          - if: slots.timealignment matches "other"
+            then: timealignment_other_collect
+          - else: mark_treatment_assignment_done
+      - id: timealignment_other_collect
+        collect: timealignment_other
+      - id: mark_treatment_assignment_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
+      # === Outcomes component ===
+      - id: outcomes_details
+        collect: outcomes_primaryoutcome
+      - collect: outcomes_outcomes_definations
+      - collect: outcomes_validation
+      - collect: outcomes_codes
+      - collect: outcomes_competingrisks
+      - collect: outcomes_negativecontrols
+      - collect: outcomes_secondaryoutcomes
+      - collect: outcomes_secondary_defination
+      - collect: outcomes_safetyoutcomes
+      - id: mark_outcomes_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
+      # === Follow-up component ===
+      - id: follow_up_details
+        collect: follow_up_start
+      - collect: follow_up_lag_time
+      - collect: follow_up_end
+      - collect: follow_up_censoringrules
+      - collect: follow_up_treatmentswitching
+      - collect: follow_up_mediantime
+      - id: mark_follow_up_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
+      # === Causal contrasts component ===
+      - id: causal_contrasts_details
+        collect: causal_contrasts_analysisapproach
+        next:
+          - if: slots.causal_contrasts_analysisapproach matches "other"
+            then: causal_contrasts_other_collect
+          - else: mark_causal_contrasts_done
+      - id: causal_contrasts_other_collect
+        collect: causal_contrasts_other
+      - id: mark_causal_contrasts_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
+
+      # === Statistical analysis component ===
+      - id: statistical_analysis_details
+        collect: statistical_analysis_models
+      - collect: statistical_analysis_effectmetrics
+      - collect: statistical_analysis_sensitivityanalyses
+      - collect: statistical_analysis_subgroupanalyses
+      - collect: statistical_analysis_subgroupmodel
+      - collect: statistical_analysis_missingdataapproach
+      - collect: statistical_analysis_missingdataapproachother
+      - collect: statistical_analysis_software
+      - id: mark_statistical_analysis_done
+        action: action_mark_component_done
+        next:
+          - then: check_finish
+      # === Check if finished ===
       - id: check_finish
         action: action_check_finish_pipeline
         next:
