@@ -33,6 +33,10 @@ responses:
   # ---- NEW ask responses for collect steps ----
   utter_ask_user_intent:
     - text: "What kind of help do you need? You can say: evidence, concept, or options."
+  utter_ask_component:
+    - text: "Which protocol component should I recommend options for?"
+  utter_ask_concept_to_explain:
+    - text: "Which concept or term from target trial emulation would you like me to explain or find examples for?"
 
 actions:
   - action_options_search

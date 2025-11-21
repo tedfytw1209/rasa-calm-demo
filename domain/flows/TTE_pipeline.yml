@@ -86,8 +86,8 @@ slots:
       - type: custom
 
 responses:
-  utter_component_ask:
-    - text: "Which component would you like to work on next? Your options are: objectives, eligibility, treatment_strategies, treatment_assignment, outcomes, follow_up, causal_contrasts, statistical_analysis."
+  utter_ask_current_component:
+    - text: "Which TTE protocol component do you want to work on now? For example: eligibility, treatment_assignment, outcomes, follow_up, etc."
   # ---- Eligibility ----
   utter_ask_eligibility_population:
     - text: "Please describe the target population for your study’s eligibility criteria."
