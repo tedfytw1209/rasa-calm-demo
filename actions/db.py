@@ -35,6 +35,8 @@ class Transaction(BaseModel):
 class TTE_Options(BaseModel):
     name: str
     counts: int
+    def stringify(self):
+        return f"{self.name}:{self.counts}"
 
 class Contact(BaseModel):
     name: str

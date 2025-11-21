@@ -57,7 +57,7 @@ flows:
   
   options_recommendation:
     name: options recommendation
-    description: Options Recommender agent. Recommend suitable options for various components of a Target Trial Emulation (TTE) protocol (via RAG).
+    description: Options Recommender agent. Recommend suitable options for various components of a Target Trial Emulation (TTE).
     steps:
       - collect: component
         reset_after_flow_ends: false
