@@ -14,5 +14,5 @@ class OptionsSearch(Action):
             tracker: Tracker, domain: Dict[str, Any]):
         component = tracker.slots.get("component")
         options = get_options_for_component(tracker.sender_id, component)
-        options_list = "\n".join([o.stringify() for o in options])
+        options_list = "\n".join([o.stringify().strip('\n') for o in options])
         return [SlotSet("options_list", options_list)]

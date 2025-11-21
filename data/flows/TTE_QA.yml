@@ -45,6 +45,7 @@ flows:
         reset_after_flow_ends: true
         ask_before_filling: false
       - action: action_trigger_search
+        next: END
 
   concept_explain:
     name: concept explain
@@ -54,6 +55,7 @@ flows:
         reset_after_flow_ends: true
         ask_before_filling: false
       - action: action_trigger_search
+        next: END
   
   options_recommendation:
     name: options recommendation
@@ -64,6 +66,7 @@ flows:
         ask_before_filling: false
       - action: action_options_search
       - action: utter_options_list
+        next: END
 
   cancel_qa:
     name: cancel qa
