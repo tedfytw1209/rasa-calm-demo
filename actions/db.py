@@ -8,6 +8,8 @@ from pydantic import BaseModel
 from rasa.nlu.utils import write_json_to_file
 from rasa.shared.utils.io import read_json_file
 
+from actions.tte_data import COMPONENT_TO_COLUMNS, FIELD_TO_COLUMN
+
 ORIGIN_DB_PATH = "db"
 CONTACTS = "contacts.json"
 TRANSACTIONS = "transactions.json"
@@ -94,6 +96,34 @@ def get_options_for_component(session_id: str, current_component: str):
     if current_component not in data.columns:
         return []
     value_counts = data[current_component].value_counts().head(5)
+    options = [{'name': name, 'counts': int(counts)} for name, counts in value_counts.items()]
+    return [TTE_Options(**item) for item in options]
+
+def get_options_for_field(
+    field_key: str,
+    max_examples: int = 5,
+) -> TTE_Options | None:
+    """
+    Given a field key like 'treatment_strategies.DoseSchedule',
+    look up the corresponding CSV column and return example values.
+    """
+    csv_column = FIELD_TO_COLUMN.get(field_key)
+    if not csv_column:
+        return None
+
+    df = pd.read_csv('db/Final_normalize_options.csv')
+
+    if csv_column not in df.columns:
+        return None
+
+    series = df[csv_column].dropna().astype(str).str.strip()
+    series = series[series != ""]
+
+    if series.empty:
+        return None
+
+    value_counts = series.value_counts().head(max_examples)
+
     options = [{'name': name, 'counts': int(counts)} for name, counts in value_counts.items()]
     return [TTE_Options(**item) for item in options]
 

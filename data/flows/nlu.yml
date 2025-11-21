@@ -146,35 +146,82 @@ nlu:
       - Please help me define my study population and inclusion criteria.
       - I want to describe my exposure and comparator strategies for TTE.
 
+nlu:
+  # 1) General QA – user just “asks something about TTE”, not specifying mode
   - intent: target_trail_emulation_qa
     examples: |
-      - How do I define the eligibility criteria for my target trial?
-      - What does time alignment mean in a target trial emulation?
-      - Show me examples of eligibility definitions from published TTE studies.
-      - What are some options for selecting comparator groups in an emulated trial?
-      - I need evidence on how other studies define their index date.
-      - Can you retrieve examples of inclusion criteria from the literature?
-      - What methods can I use for confounder adjustment?
-      - Help me build the follow-up section of my protocol.
-      - Explain person-time matching in TTE design.
-      - Provide options for handling treatment switching.
-      - I want to see how previous studies defined vaccinated status.
-      - Show me examples of primary outcomes used in TTE protocols.
-      - What is per-protocol analysis in the context of TTE?
-      - Give me examples of using IPTW in target trial emulation.
       - How should I structure the causal contrast part of the protocol?
-      - Provide some methodological options for the matching strategy.
-      - Retrieve evidence on grace periods in observational studies.
-      - Help me define the comparator group for this target trial.
       - What is the recommended follow-up start in similar studies?
       - Can you explain outcome misclassification in TTE?
       - Please give me options for handling missing data in my protocol.
       - I want to check whether my treatment strategies definition is complete.
-      - What is calendar-time matching?
-      - How do I operationalize computable phenotypes?
+      - How should I define eligibility for my target trial emulation?
+      - I’m not sure if my comparator group makes sense. Can you review it?
+      - How do I operationalize computable phenotypes in this study?
       - What are best practices for defining exclusion criteria?
-      - What types of sensitivity analyses are commonly used?
+      - What types of sensitivity analyses are commonly used in TTE studies?
       - What are some valid causal contrasts for this design?
+      - I want help improving my TTE protocol.
+      - Can you review my target trial design and suggest improvements?
+      - I need help refining my outcome definitions for this emulation.
+      - How do I decide on an appropriate grace period here?
+
+  # 2) Concept explanation – “what is / explain / meaning of …”
+  - intent: tte_concept_question
+    examples: |
+      - What does new-user design in time alignment mean in a target trial emulation?
+      - What does person-time matching mean in a target trial emulation?
+      - Can you explain nested design in time alignment?
+      - What does calendar time matching mean in a TTE study?
+      - What is the meaning of grace period in target trial emulation?
+      - Explain new-user design in the context of time alignment.
+      - Explain person-time matching in TTE design.
+      - What is per-protocol analysis in the context of TTE?
+      - What does intention-to-treat analysis mean in an emulated trial?
+      - What is immortal time bias in target trial emulation?
+      - What is index date in a TTE study?
+      - What does treatment switching mean in TTE?
+      - Can you explain what negative control outcomes are?
+      - What is a computable phenotype?
+      - What do we mean by calendar-time alignment?
+
+  # 3) Evidence / examples from literature – “show me how others did it”
+  - intent: tte_evidence_search
+    examples: |
+      - I want to see how previous studies defined vaccinated status.
+      - Give me examples of using IPTW in target trial emulation.
+      - Retrieve evidence on grace periods in observational studies.
+      - Show me examples of eligibility from published TTE studies.
+      - Can you retrieve examples of inclusion criteria from the literature?
+      - Show me how other studies defined comparator groups in emulated trials.
+      - Give me examples of outcome definitions used in TTE protocols.
+      - Find studies that used person-time matching in target trial emulation.
+      - Show me prior work on per-protocol analyses in observational vaccine studies.
+      - Retrieve examples of how follow-up start was defined in similar TTEs.
+      - Can you show examples of negative control outcomes from published TTE studies?
+      - I’d like to see example computable phenotypes from the literature.
+      - Find examples of calendar-time matching in pharmacoepidemiology.
+      - Show me example TTE protocols for vaccine effectiveness.
+      - Retrieve published examples of time alignment strategies.
+
+  # 4) Options / recommendations – “what are my options / suggest approaches”
+  - intent: tte_options_recommendation
+    examples: |
+      - What are some options for selecting comparator groups in an emulated trial?
+      - Provide options for handling treatment switching.
+      - Provide some methodological options for the matching strategy.
+      - What are my options for defining the grace period?
+      - Suggest different ways to define follow-up start and end.
+      - What are alternative approaches to confounder adjustment in this TTE?
+      - Give me options for handling missing outcome data.
+      - What options do I have for time alignment in this design?
+      - Suggest different ways to define eligibility for this target trial.
+      - What are possible strategies for defining exposure in my emulated trial?
+      - Give me a few options for specifying primary and secondary outcomes.
+      - What approaches can I use for sensitivity analysis in this study?
+      - Suggest options for handling treatment discontinuation.
+      - What are some reasonable causal contrasts I could target for this design?
+      - Give me methodological options for defining the comparator group.
 
   - intent: inform_pizza_type
     examples: |

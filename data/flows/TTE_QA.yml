@@ -40,6 +40,10 @@ flows:
   evidence_search:
     name: evidence search
     description: Evidence Assistant agent. Retrieve and summarize examples from annotated TTE study data or literature (via RAG).
+    nlu_trigger:
+      - intent:
+          name: tte_evidence_search
+          confidence_threshold: 0.5
     steps:
       - collect: concept_to_explain
         reset_after_flow_ends: true
@@ -50,6 +54,10 @@ flows:
   concept_explain:
     name: concept explain
     description: Concept Explainer agent for a Target Trial Emulation (TTE) protocol. Explain the meaning of a given concept or term used in TTE studies (via RAG).
+    nlu_trigger:
+      - intent:
+          name: tte_concept_question
+          confidence_threshold: 0.5
     steps:
       - collect: concept_to_explain
         reset_after_flow_ends: true
@@ -59,12 +67,20 @@ flows:
   
   options_recommendation:
     name: options recommendation
-    description: Options Recommender agent. Recommend suitable options for various components of a Target Trial Emulation (TTE).
+    description: Options Recommender agent. Recommend suitable options for various fields of a Target Trial Emulation (TTE).
+    nlu_trigger:
+      - intent:
+          name: tte_options_recommendation
+          confidence_threshold: 0.5
     steps:
-      - collect: component
+      - collect: tte_field
         reset_after_flow_ends: false
         ask_before_filling: false
       - action: action_options_search
+        next:
+          - if: "slots.option_search_finish == true"
+            then: END
+          - else: call_options_recommendation
       - action: utter_options_list
         next: END
 
