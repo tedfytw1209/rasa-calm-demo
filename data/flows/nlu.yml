@@ -130,9 +130,24 @@ nlu:
       - I would like to order a [diavola](pizza_type) pizza.
       - I would like to order a [quattro formaggi](pizza_type) pizza.
 
-  - intent: target_trail_emulation_qa
+  - intent: target_trail_emulation_pipeline
     examples: |
       - Help me with target trial emulation design.
+      - How should I design my TTE study?
+      - Help me complete the statistical analysis section.
+      - I want to build my target trial protocol step by step.
+      - Can you guide me through constructing a TTE protocol?
+      - Please walk me through the next component of my TTE study.
+      - I need assistance drafting all components of a target trial emulation.
+      - I want to define the follow-up period for my emulation. Can you guide me?
+      - I'm building a TTE study and need guidance completing each section.
+      - Assist me in completing the causal contrast definition.
+      - I need help completing all TTE components until the protocol is done.
+      - Please help me define my study population and inclusion criteria.
+      - I want to describe my exposure and comparator strategies for TTE.
+
+  - intent: target_trail_emulation_qa
+    examples: |
       - How do I define the eligibility criteria for my target trial?
       - What does time alignment mean in a target trial emulation?
       - Explain the concept of immortal time bias.
@@ -140,14 +155,12 @@ nlu:
       - What are some options for selecting comparator groups in an emulated trial?
       - I need evidence on how other studies define their index date.
       - Can you retrieve examples of inclusion criteria from the literature?
-      - How should I operationalize my exposure definition for a TTE study?
       - What methods can I use for confounder adjustment?
       - Help me build the follow-up section of my protocol.
       - Explain person-time matching in TTE design.
       - Provide options for handling treatment switching.
       - I want to see how previous studies defined vaccinated status.
       - Show me examples of primary outcomes used in TTE protocols.
-      - Help me complete the statistical analysis section.
       - What is per-protocol analysis in the context of TTE?
       - Give me examples of using IPTW in target trial emulation.
       - How should I structure the causal contrast part of the protocol?

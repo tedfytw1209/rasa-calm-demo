@@ -1,0 +1,44 @@
+version: "3.1"
+
+flows:
+  target_trail_emulation_pipeline:
+    name: target trail emulation pipeline builder
+    description: Support target trail emulation protocol building flow
+    nlu_trigger:
+      - intent:
+          name: target_trail_emulation_pipeline
+          confidence_threshold: 0.5
+    steps:
+      # Ask which component to work on
+      - id: ask_component
+        action: utter_component_ask
+
+      - id: pick_component
+        collect: current_component
+        ask_before_filling: true
+        next:
+          - if: slots.current_component = "eligibility"
+            then: eligibility_details
+          # later you can add other components here
+          # - if: slots.current_component = "outcomes"
+          #   then: outcomes_details
+          - else: check_finish
+
+      # === Eligibility component details ===
+      - id: eligibility_details
+        collect: eligibility_population
+      - collect: eligibility_inclusioncriteria
+      - collect: eligibility_exclusioncriteria
+      - collect: eligibility_computablephenotype
+      - collect: eligibility_population_evaluation
+      - id: mark_eligibility_done
+        action: action_mark_component_done
+      - id: check_finish
+        action: action_check_finish_pipeline
+        next:
+          - if: not slots.finish
+            then: ask_component
+          - else: export_pipeline_json_step
+      # === Export protocol JSON ===
+      - id: export_pipeline_json_step
+        action: action_export_protocol_json

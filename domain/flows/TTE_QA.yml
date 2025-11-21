@@ -2,7 +2,6 @@ version: "3.1"
 
 intents:
   - target_trial_emulation
-  - provide_pipeline
   - provide_evidence
   - ask_concept
   - ask_options
@@ -11,122 +10,22 @@ slots:
   user_intent:
     type: categorical
     values:
-      - pipeline
       - evidence
       - concept
       - options
     mappings:
         - type: from_llm
-  current_component:
-    type: categorical
-    values:
-      - objectives
-      - eligibility
-      - treatment_strategies
-      - treatment_assignment
-      - outcomes
-      - follow_up
-      - causal_contrasts
-      - statistical_analysis
-    mappings:
-      - type: from_llm
-  options_list:
-    type: text
-    mappings:
-      - type: controlled
-  eligibility_population:
-    type: text
-    mappings: 
-      - type: from_llm
-  eligibility_inclusioncriteria:
-    type: text
-    mappings: 
-      - type: from_llm
-  eligibility_exclusioncriteria:
-    type: text
-    mappings: 
-      - type: from_llm
-  eligibility_computablephenotype:
-    type: text
-    mappings: 
-      - type: from_llm
-  eligibility_population_evaluation:
-    type: text
-    mappings: 
-      - type: from_llm
-  # Pipeline completion flags
-  eligibility_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  objectives_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  treatment_strategies_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  treatment_assignment_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  outcomes_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  follow_up_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  causal_contrasts_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  statistical_analysis_done:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
-  finish:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: custom
 
 responses:
   utter_options_list:
     - text: "Your current options of {current_component} are:\n {options_list}"
   utter_cancel_qa:
     - text: QA has been cancelled.
-  utter_component_ask:
-    - text: "Which component would you like to work on next? Your options are: objectives, eligibility, treatment_strategies, treatment_assignment, outcomes, follow_up, causal_contrasts, statistical_analysis."
+
   # ---- NEW ask responses for collect steps ----
   utter_ask_user_intent:
     - text: "What kind of help do you need? You can say: pipeline, evidence, concept, or options."
-  utter_ask_current_component:
-    - text: "Which protocol component do you want to work on now? For example: eligibility, treatment_assignment, outcomes, follow_up, etc."
-  utter_ask_eligibility_population:
-    - text: "Please describe the target population for your study’s eligibility criteria."
-  utter_ask_eligibility_inclusioncriteria:
-    - text: "Please list the inclusion criteria for your study."
-  utter_ask_eligibility_exclusioncriteria:
-    - text: "Please list the exclusion criteria for your study."
-  utter_ask_eligibility_computablephenotype:
-    - text: "Please describe the computable phenotype (codes/algorithms) that define eligibility."
-  utter_ask_eligibility_population_evaluation:
-    - text: "How will you evaluate or validate that your population definition works as intended?"
 
 actions:
   - action_options_search
   - action_trigger_search
-  - action_mark_component_done
-  - action_check_finish_pipeline
-  - action_export_protocol_json

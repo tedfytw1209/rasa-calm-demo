@@ -1,4 +1,4 @@
-version: "3.14"
+version: "3.1"
 
 flows:
   target_trail_emulation_qa:
@@ -12,8 +12,6 @@ flows:
       - id: classify_intent
         call: classify_user_intent
         next:
-          - if: slots.user_intent = "pipeline"
-            then: call_pipeline_assistant
           - if: slots.user_intent = "evidence"
             then: call_evidence_search
           - if: slots.user_intent = "concept"
@@ -21,26 +19,19 @@ flows:
           - if: slots.user_intent = "options"
             then: call_options_recommendation
           - else: call_cancel_qa
-
       # These are call steps into other flows
-      - id: call_pipeline_assistant
-        call: pipeline_assistant
-
       - id: call_evidence_search
         call: evidence_search
-
       - id: call_concept_explain
         call: concept_explain
-
       - id: call_options_recommendation
         call: options_recommendation
-
       - id: call_cancel_qa
         call: cancel_qa
 
   classify_user_intent:
     name: classify user intent
-    description: You are the Workflow Classifier for the TTE Protocol Builder. User intent classification for QA purposes. rag ↔ intent is evidence; define ↔ intent is concept; compare, options ↔ intent is options. Return { user_intent include pipeline | evidence | concept | options }
+    description: You are the Workflow Classifier for the TTE Protocol Builder. User intent classification for QA purposes. rag ↔ intent is evidence; define ↔ intent is concept; compare, options ↔ intent is options. Return { user_intent include evidence | concept | options }
     steps:
       - collect: user_intent
         reset_after_flow_ends: true
@@ -65,47 +56,9 @@ flows:
       - action: action_options_search
       - action: utter_options_list
 
-  pipeline_assistant:
-    name: pipeline assistant
-    description: Pipeline Assistant agent for guiding users through the steps of building a Target Trial Emulation (TTE) protocol.
-    steps:
-      # Ask which component to work on
-      - id: ask_component
-        action: utter_component_ask
-
-      - id: pick_component
-        collect: current_component
-        ask_before_filling: true
-        next:
-          - if: slots.current_component = "eligibility"
-            then: eligibility_details
-          # later you can add other components here
-          # - if: slots.current_component = "outcomes"
-          #   then: outcomes_details
-          - else: check_finish
-
-      # === Eligibility component details ===
-      - id: eligibility_details
-        collect: eligibility_population
-      - collect: eligibility_inclusioncriteria
-      - collect: eligibility_exclusioncriteria
-      - collect: eligibility_computablephenotype
-      - collect: eligibility_population_evaluation
-      - id: mark_eligibility_done
-        action: action_mark_component_done
-      - id: check_finish
-        action: action_check_finish_pipeline
-        next:
-          - if: not slots.finish
-            then: ask_component
-          - else: export_pipeline_json_step
-
-      # === Export protocol JSON ===
-      - id: export_pipeline_json_step
-        action: action_export_protocol_json
-
   cancel_qa:
     name: cancel qa
     description: Cancel the QA session.
     steps:
       - action: utter_cancel_qa
+        next: END
