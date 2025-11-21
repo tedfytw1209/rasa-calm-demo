@@ -34,7 +34,6 @@ flows:
             then: export_pipeline_json_step
           - else: compute_next_component
       - id: compute_next_component
-        action: action_next_component
         next:
           - if: slots.next_component = "objectives"
             then: objectives_details
