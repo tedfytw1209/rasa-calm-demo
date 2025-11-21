@@ -39,7 +39,7 @@ flows:
       - id: mark_objectives_done
         action: action_mark_component_done
         next:
-          - then: check_finish
+          - else: check_finish
       # === Eligibility component details ===
       - id: eligibility_details
         collect: eligibility_population
@@ -49,6 +49,8 @@ flows:
       - collect: eligibility_population_evaluation
       - id: mark_eligibility_done
         action: action_mark_component_done
+        next:
+          - else: check_finish
       # === Treatment strategies component ===
       - id: treatment_strategies_details
         collect: treatment_strategies_treatmentgroup
@@ -64,7 +66,7 @@ flows:
       - id: mark_treatment_strategies_done
         action: action_mark_component_done
         next:
-          - then: check_finish
+          - else: check_finish
       # === treatment assignment component details ===
       - id: treatment_assignment_details
         collect: index_date
@@ -78,7 +80,7 @@ flows:
       - id: mark_treatment_assignment_done
         action: action_mark_component_done
         next:
-          - then: check_finish
+          - else: check_finish
       # === Outcomes component ===
       - id: outcomes_details
         collect: outcomes_primaryoutcome
@@ -93,7 +95,7 @@ flows:
       - id: mark_outcomes_done
         action: action_mark_component_done
         next:
-          - then: check_finish
+          - else: check_finish
       # === Follow-up component ===
       - id: follow_up_details
         collect: follow_up_start
@@ -105,7 +107,7 @@ flows:
       - id: mark_follow_up_done
         action: action_mark_component_done
         next:
-          - then: check_finish
+          - else: check_finish
       # === Causal contrasts component ===
       - id: causal_contrasts_details
         collect: causal_contrasts_analysisapproach
@@ -118,7 +120,7 @@ flows:
       - id: mark_causal_contrasts_done
         action: action_mark_component_done
         next:
-          - then: check_finish
+          - else: check_finish
 
       # === Statistical analysis component ===
       - id: statistical_analysis_details
@@ -133,7 +135,8 @@ flows:
       - id: mark_statistical_analysis_done
         action: action_mark_component_done
         next:
-          - then: check_finish
+          - else: check_finish
+      
       # === Check if finished ===
       - id: check_finish
         action: action_check_finish_pipeline
