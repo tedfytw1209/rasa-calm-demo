@@ -132,7 +132,6 @@ nlu:
 
   - intent: target_trail_emulation_pipeline
     examples: |
-      - Help me with target trial emulation design.
       - How should I design my TTE study?
       - Help me complete the statistical analysis section.
       - I want to build my target trial protocol step by step.
@@ -168,7 +167,7 @@ nlu:
   # 2) Concept explanation – “what is / explain / meaning of …”
   - intent: tte_concept_question
     examples: |
-      - What does new-user design in time alignment mean in a target trial emulation?
+      - What does new-user design in time alignment mean in TTE?
       - What does person-time matching mean in a target trial emulation?
       - Can you explain nested design in time alignment?
       - What does calendar time matching mean in a TTE study?
