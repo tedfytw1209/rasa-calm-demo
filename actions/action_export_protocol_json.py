@@ -17,15 +17,6 @@ class ActionExportProtocolJson(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-
-        finish = tracker.get_slot("finish")
-        if not finish:
-            # Not finished yet; nothing to export
-            dispatcher.utter_message(
-                text="The protocol is not fully complete yet. We can keep working on it."
-            )
-            return []
-
         # Build a simple nested JSON structure.
         # Build a nested JSON structure for all components
         protocol: Dict[str, Any] = {
