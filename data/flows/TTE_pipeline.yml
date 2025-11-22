@@ -32,27 +32,23 @@ flows:
             then: statistical_analysis_details
           - if: slots.current_component = "finish"
             then: export_pipeline_json_step
-          - else: 
-            next:
-            - if: slots.next_component = "objectives"
-              then: objectives_details
-            - if: slots.next_component = "eligibility"
-              then: eligibility_details
-            - if: slots.next_component = "treatment_strategies"
-              then: treatment_strategies_details
-            - if: slots.next_component = "treatment_assignment"
-              then: treatment_assignment_details
-            - if: slots.next_component = "outcomes"
-              then: outcomes_details
-            - if: slots.next_component = "follow_up"
-              then: follow_up_details
-            - if: slots.next_component = "causal_contrasts"
-              then: causal_contrasts_details
-            - if: slots.next_component = "statistical_analysis"
-              then: statistical_analysis_details
-            - if: slots.next_component = "finish"
-              then: export_pipeline_json_step
-            - else: check_finish
+          - if: slots.next_component = "objectives"
+            then: objectives_details
+          - if: slots.next_component = "eligibility"
+            then: eligibility_details
+          - if: slots.next_component = "treatment_strategies"
+            then: treatment_strategies_details
+          - if: slots.next_component = "treatment_assignment"
+            then: treatment_assignment_details
+          - if: slots.next_component = "outcomes"
+            then: outcomes_details
+          - if: slots.next_component = "follow_up"
+            then: follow_up_details
+          - if: slots.next_component = "causal_contrasts"
+            then: causal_contrasts_details
+          - if: slots.next_component = "statistical_analysis"
+            then: statistical_analysis_details
+          - else: check_finish
       # === Objectives component details ===
       - id: objectives_details
         collect: objectives_objectives
