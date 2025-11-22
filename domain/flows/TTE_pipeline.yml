@@ -16,7 +16,7 @@ slots:
       - causal_contrasts
       - statistical_analysis
       - finish
-      - else
+      - next
     mappings:
       - type: from_llm
   next_component:
