@@ -94,10 +94,7 @@ class ActionExportProtocolJson(Action):
 
         # ---------- Notify user ----------
         dispatcher.utter_message(
-            text=(
-                f"Your TTE protocol has been exported successfully!\n"
-                f"**File:** `{filename}`\n"
-            )
+            text=f"Your TTE protocol has been exported successfully!\nFile: {filename}"
         )
 
         return []
